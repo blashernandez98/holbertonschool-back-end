@@ -6,18 +6,21 @@ if __name__ == '__main__':
     from sys import argv
 
     user = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}'.format(argv[1])).json()
+        'https://jsonplaceholder.typicode.com/users/{}'.
+        format(argv[1])).json()
+
     todos = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1])).json()
+        'https://jsonplaceholder.typicode.com/users/{}/todos'.
+        format(argv[1])).json()
 
     completed = []
     for todo in todos:
         if todo.get('completed'):
             completed.append(todo.get('title'))
 
-    print("Emplyee {} is done with tasks({}/{}):".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         user.get('name'), len(completed), len(todos)
     ))
 
     for task in completed:
-        print('\t{}'.format(task))
+        print('\t {}'.format(task))
