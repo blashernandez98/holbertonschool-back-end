@@ -1,26 +1,27 @@
 #!/usr/bin/python3
 """ Task 1 module """
 
-import csv
-from requests import get
-from sys import argv
+if __name__ == '__main__':
+    import csv
+    from requests import get
+    from sys import argv
 
-user = get(
-    'https://jsonplaceholder.typicode.com/users/{}'.
-    format(argv[1])).json()
+    user = get(
+        'https://jsonplaceholder.typicode.com/users/{}'.
+        format(argv[1])).json()
 
-todos = get(
-    'https://jsonplaceholder.typicode.com/users/{}/todos'.
-    format(argv[1])).json()
+    todos = get(
+        'https://jsonplaceholder.typicode.com/users/{}/todos'.
+        format(argv[1])).json()
 
-file_name = '{}.csv'.format(user.get('id'))
+    file_name = '{}.csv'.format(user.get('id'))
 
-with open(file_name, 'w') as f:
-    writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL)
-    for task in todos:
-        writer.writerow([
-            user.get('id'),
-            user.get('username'),
-            task.get('completed'),
-            task.get('title')
-        ])
+    with open(file_name, 'w') as f:
+        writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL)
+        for task in todos:
+            writer.writerow([
+                user.get('id'),
+                user.get('username'),
+                task.get('completed'),
+                task.get('title')
+            ])
