@@ -16,7 +16,7 @@ todos = get(
 file_name = '{}.csv'.format(user.get('id'))
 
 with open(file_name, 'w') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL)
     for task in todos:
         writer.writerow([
             user.get('id'),
